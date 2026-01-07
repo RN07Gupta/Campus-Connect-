@@ -1,0 +1,27 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #1656bd;
+}
+
+.hero {
+  height: 80vh;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../assets/images/campus.jpg') center/cover no-repeat;
+}
+
+.card {
+  border-radius: 1rem;
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .hero p {
+    font-size: 1rem;
+  }
+}

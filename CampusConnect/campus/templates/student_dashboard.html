@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Dashboard | Campus Connect</title>
+
+    <style>
+      /* ---------- GLOBAL ---------- */
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f9;
+      }
+
+      /* ---------- NAVBAR ---------- */
+      .navbar {
+        width: 100%;
+        padding: 15px 30px;
+        background: linear-gradient(90deg, #3a6cf4, #274ac7);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+      }
+
+      .nav-links a {
+        color: white;
+        margin-left: 20px;
+        text-decoration: none;
+        font-size: 1rem;
+      }
+
+      /* ---------- NOTIFICATION BELL ---------- */
+      .notif-bell {
+        position: relative;
+        margin-left: 15px;
+        cursor: pointer;
+      }
+
+      .notif-bell i {
+        font-size: 24px;
+        color: white;
+      }
+
+      .notif-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: red;
+        color: white;
+        border-radius: 50%;
+        padding: 3px 7px;
+        font-size: 10px;
+        display: none;
+      }
+
+      .notif-card {
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        width: 280px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        display: none;
+        max-height: 350px;
+        overflow-y: auto;
+        z-index: 1000;
+      }
+
+      .notif-card h6 {
+        padding: 10px;
+        margin: 0;
+        border-bottom: 1px solid #ddd;
+        font-size: 1.1rem;
+      }
+
+      .notif-item {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        font-size: 0.9rem;
+      }
+
+      /* ---------- SECTION TITLE ---------- */
+      .section-title {
+        text-align: center;
+        font-size: 2rem;
+        color: #3a6cf4;
+        font-weight: bold;
+        margin-top: 40px;
+      }
+
+      /* ---------- CARD CONTAINER ---------- */
+      .row {
+        width: 90%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 25px;
+        margin-top: 40px;
+      }
+
+      /* ---------- CARD ---------- */
+      .card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        text-align: center;
+        transition: 0.3s;
+        position: relative;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .card-icon {
+        font-size: 45px;
+        margin-bottom: 15px;
+        color: #3a6cf4;
+      }
+
+      .card-title {
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .badge-new {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: #ff4d4d;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+      }
+
+      /* ---------- BUTTON ---------- */
+      .btn {
+        padding: 10px 18px;
+        background: #3a6cf4;
+        color: white;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        border: none;
+      }
+
+      .btn:hover {
+        background: #274ac7;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <div class="navbar">
+      <a class="navbar-brand" href="#">CampusConnect</a>
+
+      <div class="nav-links">
+        <a href="{% url 'clubs' %}">Clubs</a>
+        <a href="{% url 'events' %}">Events</a>
+        <a href="{% url 'placements' %}">Placements</a>
+        <a href="{% url 'register' %}">Logout</a>
+
+        <span class="notif-bell" id="notifBell">
+          <i>🔔</i>
+          <span class="notif-badge" id="notifCount">0</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- NOTIFICATION POPUP -->
+    <div class="notif-card" id="notifCard">
+      <h6>Notifications</h6>
+      <div id="notifList"></div>
+    </div>
+
+    <h2 class="section-title">Welcome,Student! </h2>
+
+    <!-- CARDS -->
+    <div class="row">
+      <div class="card">
+        <span class="badge-new">New</span>
+        <div class="card-icon">👥</div>
+        <h3 class="card-title">Clubs</h3>
+        <p>View and join campus clubs to expand your skills.</p>
+        <a class="btn" href="{% url 'clubs' %}">Go</a>
+      </div>
+
+      <div class="card">
+        <span class="badge-new">3</span>
+        <div class="card-icon">📅</div>
+        <h3 class="card-title">Events</h3>
+        <p>Check upcoming events and participate.</p>
+        <a class="btn" href="{% url 'events' %}">Go</a>
+      </div>
+
+      <div class="card">
+        <span class="badge-new">2</span>
+        <div class="card-icon">💼</div>
+        <h3 class="card-title">Placements</h3>
+        <p>Explore placement drives and apply easily.</p>
+        <a class="btn" href="{% url 'placements' %}">Go</a>
+      </div>
+    </div>
+
+   {% comment %} <h2>Your Attendance</h2> {% endcomment %}
+
+{% comment %} <table border="1">
+  <tr>
+    <th>Subject</th>
+    <th>Total Classes</th>
+    <th>Present</th>
+    <th>Attendance %</th>
+  </tr>
+
+  {% for a in attendance_data %}
+  <tr>
+    <td>{{ a.subject }}</td>
+    <td>{{ a.total }}</td>
+    <td>{{ a.present }}</td>
+    <td>{{ a.percentage }}%</td>
+  </tr>
+  {% endfor %}
+</table> {% endcomment %}
+
+    <script>
+      // LocalStorage notifications
+      function loadStudentData() {
+        const events = JSON.parse(localStorage.getItem("events")) || [];
+        const placements = JSON.parse(localStorage.getItem("placements")) || [];
+
+        const combined = [
+          ...events.map((e) => ({
+            type: "Event",
+            title: e.title,
+            date: e.date,
+          })),
+          ...placements.map((p) => ({
+            type: "Placement",
+            title: p.name + " - " + p.role,
+            date: p.date,
+          })),
+        ];
+
+        const notifList = document.getElementById("notifList");
+        const notifCount = document.getElementById("notifCount");
+        notifList.innerHTML = "";
+
+        if (combined.length === 0) {
+          notifList.innerHTML =
+            "<p style='text-align:center;color:#777'>No notifications yet</p>";
+          notifCount.style.display = "none";
+        } else {
+          notifCount.innerText = combined.length;
+          notifCount.style.display = "inline-block";
+          combined.forEach((n) => {
+            let div = document.createElement("div");
+            div.className = "notif-item";
+            div.innerHTML = `<strong>${n.type}:</strong> ${n.title}<br><small>${n.date}</small>`;
+            notifList.appendChild(div);
+          });
+        }
+
+        document.getElementsByClassName("badge-new")[1].innerText =
+          events.length;
+        document.getElementsByClassName("badge-new")[2].innerText =
+          placements.length;
+      }
+
+      document.getElementById("notifBell").onclick = () => {
+        const card = document.getElementById("notifCard");
+        card.style.display = card.style.display === "block" ? "none" : "block";
+      };
+
+      window.onload = loadStudentData;
+    </script>
+  </body>
+</html>

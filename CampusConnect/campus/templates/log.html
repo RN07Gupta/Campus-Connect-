@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Connect | Login</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #4e73df, #1cc88a);
+            height: 100vh;
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 450px;
+            padding: 20px;
+        }
+
+        .login-card {
+            border-radius: 15px;
+            padding: 35px;
+            background: #ffffff;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        .login-card h3 {
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .login-card p {
+            text-align: center;
+            color: #777;
+        }
+
+        /* Input Fields */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-box,
+        .select-box {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 16px;
+            border: 1px solid #bbb;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-box:focus,
+        .select-box:focus {
+            border-color: #4e73df;
+        }
+
+        /* Button */
+        .btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 17px;
+            font-weight: 600;
+            border-radius: 10px;
+            border: none;
+            background-color: #4e73df;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2e59d9;
+        }
+
+        .register-text {
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .register-text a {
+            text-decoration: none;
+            color: #4e73df;
+            font-weight: 600;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="login-wrapper">
+        <div class="login-card">
+
+            <h3>Campus Connect</h3>
+            <p>Login to continue</p>
+
+            <!-- LOGIN FORM -->
+            <form id="loginForm" method="POST" action="{% url 'log' %}">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" class="input-box" name = "email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" name = "password" class="input-box" required>
+                </div>
+
+                <div class="form-group">
+                    <label>User Type</label>
+                    <select id="userType" class="select-box" name = "role" required>
+                        <option value="">Select User Type</option>
+                        <option value="student">Student</option>
+                        <option value="admin">Coordinator</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn">Login</button>
+
+            </form>
+
+            <p class="register-text">New user? <a href="{% url 'register' %}">Register</a></p>
+        </div>
+    </div>
+
+    <!-- LOGIN JS -->
+   
+    
+
+</body>
+
+</html>

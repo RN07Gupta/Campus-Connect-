@@ -1,0 +1,242 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campus Connect</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ---------------- GLOBAL ---------------- */
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  background: #f8f9fa;
+}
+
+/* ---------------- CUSTOM CONTAINER (Bootstrap-like) ---------------- */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* ---------------- NAVBAR ---------------- */
+nav {
+  background: #000;
+  padding: 15px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  opacity: 0.7;
+}
+
+.navbar-toggler {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* ---------------- HERO SECTION ---------------- */
+.hero {
+  height: 25vh;
+    /* No background image */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 48px;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.lead {
+  color: #000;
+  font-size: 18px;
+}
+
+/* Buttons like Bootstrap */
+.btn {
+  padding: 12px 25px;
+  font-size: 16px;
+  text-decoration: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 10px;
+}
+
+.btn-primary {
+  background: #0d6efd;
+  color: #fff;
+}
+
+.btn-outline {
+  border: 2px solid #000;
+  color: #000;
+  background: transparent;
+}
+
+/* ---------------- FEATURES ---------------- */
+.features-section {
+  padding: 50px 0;
+}
+
+.feature-card {
+  width: 300px;
+  background: #fff;
+  text-align: center;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.feature-img {
+  width: 60px;
+  margin-bottom: 15px;
+}
+
+/* Card grid */
+.card-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+/* ---------------- FOOTER ---------------- */
+footer {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: #000;
+    padding: 15px;
+    border-radius: 10px;
+  }
+  .nav-links.show {
+    display: flex;
+  }
+  .navbar-toggler {
+    display: block;
+  }
+  .hero h1 {
+    font-size: 32px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="container navbar">
+    <a class="navbar-brand" href="#">CampusConnect</a>
+    <button class="navbar-toggler" id="navToggle">☰</button>
+
+    <div class="nav-links" id="navMenu">
+      <a href="{% url 'log' %}">Login</a>
+      <a href="{% url 'register' %}">Register</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <h1>Welcome to Campus Connect</h1>
+    <p class="lead">Your hub for clubs, events, and placement drives.</p>
+
+    <a href="{% url 'log' %}" class="btn btn-primary">Login</a>
+    <a href="{% url 'register' %}" class="btn btn-outline">Register</a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section">
+  <div class="container text-center">
+    <h2 class="fw-bold">What You Can Do</h2>
+    <p class="text-muted">Explore clubs, register for events, and apply to placement drives</p>
+
+    <div class="card-row">
+
+      <div class="feature-card">
+        <img src="{% static 'images/clubs.webp' %}" class="feature-img">
+        <h3>Join Clubs</h3>
+        <p>Participate in campus activities to grow your skills.</p>
+      </div>
+
+      <div class="feature-card">
+        <img src="{% static 'images/events.webp' %}" class="feature-img">
+        <h3>Attend Events</h3>
+        <p>Stay updated on campus workshops & programmes.</p>
+      </div>
+
+      <div class="feature-card">
+        <img src="{% static 'images/placements.webp' %}" class="feature-img">
+        <h3>Placement Drives</h3>
+        <p>Apply to placement opportunities directly from the portal.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2025 CampusConnect. All rights reserved.</p>
+</footer>
+
+<!-- NAV TOGGLE SCRIPT -->
+<script>
+document.getElementById("navToggle").addEventListener("click", () => {
+  document.getElementById("navMenu").classList.toggle("show");
+});
+</script>
+
+</body>
+</html>

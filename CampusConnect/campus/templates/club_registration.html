@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club Registration | Campus Connect</title>
+
+  <!-- ❌ Removed Bootstrap CSS -->
+  <!-- ✅ Added Custom CSS -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .my-5 {
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+    }
+
+    .col-md-7 {
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+
+    h3 {
+      font-size: 26px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .form-label {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .form-control, .form-select, textarea, input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-top: 4px;
+      box-sizing: border-box;
+    }
+
+    .form-control:focus,
+    .form-select:focus,
+    textarea:focus {
+      border-color: #0d6efd;
+      outline: none;
+    }
+
+    .btn {
+      background: #0d6efd;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 17px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background: #0b5ed7;
+    }
+  </style>
+
+</head>
+<body>
+
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-7">
+      <div class="card">
+        <div class="card-body">
+          <h3 id="clubTitle">Join Club</h3>
+
+          <form id="clubForm">
+
+            <div class="mb-3">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Roll Number</label>
+              <input type="text" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Department</label>
+              <select class="form-select" required>
+                <option disabled selected>Select Department</option>
+                <option>CSE</option>
+                <option>IT</option>
+                <option>AIML</option>
+                <option>ECE</option>
+                <option>EEE</option>
+                <option>ME</option>
+                <option>Civil</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Year</label>
+              <select class="form-select" required>
+                <option disabled selected>Select Year</option>
+                <option>1st Year</option>
+                <option>2nd Year</option>
+                <option>3rd Year</option>
+                <option>4th Year</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">What role are you interested in?</label>
+              <select class="form-select" required>
+                <option disabled selected>Select Role</option>
+                <option>Performer</option>
+                <option>Technical Team</option>
+                <option>Management / PR</option>
+                <option>Content / Design</option>
+                <option>Video Editing / Media</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Why do you want to join this club?</label>
+              <textarea class="form-control" rows="3" required></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Upload Audition Video / Image (Optional)</label>
+              <input type="file" class="form-control">
+            </div>
+
+            <button type="submit" class="btn">
+              Submit Application
+            </button>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Set dynamic club name
+  const urlParams = new URLSearchParams(window.location.search);
+  const clubName = urlParams.get('club');
+  document.getElementById('clubTitle').innerText = `Join ${clubName}`;
+
+  // Form submit
+  document.getElementById('clubForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert(`Your application to join ${clubName} has been submitted successfully!`);
+    window.location.href = "clubs.html";
+  });
+</script>
+
+</body>
+</html>

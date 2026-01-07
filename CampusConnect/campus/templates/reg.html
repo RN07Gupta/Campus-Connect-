@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | Campus Connect</title>
+
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #4e73df, #1cc88a);
+      height: 100vh;
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .form-control, .form-select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+    }
+
+    .form-label {
+      font-weight: 600;
+      margin-top: 10px;
+      display: block;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4e73df;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #2e59d9;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    /* hidden by default */
+    #subjectDiv {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="card">
+    <h3 class="text-center">Register</h3>
+
+    <form method="POST" action="{% url 'register' %}">
+      {% csrf_token %}
+
+      <label class="form-label">Full Name</label>
+      <input type="text" class="form-control" name="name" required>
+
+      <label class="form-label">Email</label>
+      <input type="email" class="form-control" name="email" required>
+
+      <label class="form-label">Password</label>
+      <input type="password" class="form-control" name="password" required>
+
+      <label class="form-label">Register As</label>
+      <select class="form-select" name="role" id="role" required onchange="toggleSubjects()">
+        <option value="" disabled selected>Select Role</option>
+        <option value="Student">Student</option>
+        <option value="Coordinator">Coordinator</option>
+      </select>
+
+      <label class="form-label">Department</label>
+      <select class="form-select" name="department">
+        <option value="" disabled selected>Select Department</option>
+        <option value="CSE">CSE</option>
+        <option value="ECE">ECE</option>
+        <option value="ME">Mechanical</option>
+        <option value="CE">Civil</option>
+      </select>
+
+      <!-- SUBJECT CODE (Only for Coordinator) -->
+      <div id="subjectDiv">
+        <label class="form-label">Subject Code</label>
+        <select class="form-select" name="subject_code">
+          <option value="" disabled selected>Select Subject</option>
+          <option value="ML-101">Machine Learning - 101</option>
+          <option value="DA-102">Data Analytics - 102</option>
+          <option value="DAA-103">DAA - 103</option>
+          <option value="WT-104">WT - 104</option>
+          <option value="ITCS-105">ITCS - 105</option>
+          <option value="DBMS-106">DBMS - 106</option>
+        </select>
+      </div>
+
+      <br>
+      <button type="submit">Register</button>
+    </form>
+
+    <p class="text-center mt-3">
+      Already have an account?
+      <a href="{% url 'log' %}">Login</a>
+    </p>
+  </div>
+</div>
+
+<script>
+  function toggleSubjects() {
+    const role = document.getElementById("role").value;
+    const subjectDiv = document.getElementById("subjectDiv");
+
+    if (role === "Coordinator") {
+      subjectDiv.style.display = "block";
+    } else {
+      subjectDiv.style.display = "none";
+    }
+  }
+</script>
+
+</body>
+</html>

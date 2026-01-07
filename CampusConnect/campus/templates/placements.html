@@ -1,0 +1,173 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Placements | Campus Connect</title>
+
+  <!-- Custom CSS -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f7f9;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: #0dcaf0;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar-brand {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    /* MOBILE MENU */
+    #menuBtn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 26px;
+      cursor: pointer;
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      #menuBtn {
+        display: block;
+      }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #0dcaf0;
+        padding: 15px;
+        margin-top: 10px;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+    }
+
+    /* CONTAINER */
+    .container {
+      width: 90%;
+      margin: auto;
+      margin-top: 40px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    /* CARDS */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+
+    .btn {
+      display: block;
+      background: #0dcaf0;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background: #0bb3d6;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a class="navbar-brand" href="student_dashboard.html">CampusConnect</a>
+
+  <button id="menuBtn">☰</button>
+
+  <div class="nav-links" id="navLinks">
+     <a href="{% url 'clubs' %}">Clubs</a>
+    <a href="{% url 'events' %}">Events</a>
+    <a href="{% url 'placements' %}">Placements</a>
+    <a href="{% url 'register' %}">Logout</a>
+  </div>
+</nav>
+
+<!-- PAGE CONTENT -->
+<div class="container">
+  <h2>Placement Drives</h2>
+  <div class="grid" id="placementsContainer"></div>
+</div>
+
+<!-- CUSTOM JAVASCRIPT -->
+<script>
+  // Navbar toggle
+  const menuBtn = document.getElementById("menuBtn");
+  const navLinks = document.getElementById("navLinks");
+
+  menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("show");
+  });
+
+  // Placement Data
+  const placements = [
+    {company: 'Google', position: 'Software Engineer', date: '2025-12-15', description: 'Apply your coding skills.'},
+    {company: 'Infosys', position: 'Developer Trainee', date: '2025-12-20', description: 'Campus recruitment drive.'},
+    {company: 'TCS', position: 'System Analyst', date: '2025-12-25', description: 'Multiple openings available.'}
+  ];
+
+  const box = document.getElementById('placementsContainer');
+
+  placements.forEach(p => {
+    box.innerHTML += `
+      <div class="card">
+        <h3>${p.company}</h3>
+        <p><strong>Position:</strong> ${p.position}</p>
+        <p><strong>Drive Date:</strong> ${p.date}</p>
+        <p>${p.description}</p>
+        <a href="placement_apply.html?company=${encodeURIComponent(p.company)}" class="btn">Apply</a>
+      </div>
+    `;
+  });
+</script>
+
+</body>
+</html>
